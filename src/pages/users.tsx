@@ -1,5 +1,6 @@
 import { useState, useEffect, type ChangeEvent } from 'react'
 import { data } from './data'
+import Button from '../components/Button'
 
 interface User {
     id: number
@@ -30,6 +31,10 @@ export default function Users() {
     return (
         <>
             <h1>Lista de usuários</h1>
+            <Button 
+                content='Click me'
+                title='Título do botão'
+            />
             <input
                 placeholder='Pesquisar usuário...'
                 onChange={onSearchInputChanged}
