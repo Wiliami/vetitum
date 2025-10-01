@@ -10,9 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UsersRouteImport } from './routes/users'
+import { Route as RepositoriesRouteImport } from './routes/repositories'
 import { Route as PostsRouteImport } from './routes/posts'
+import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FormRouteImport } from './routes/form'
+import { Route as FetchDataRouteImport } from './routes/fetchData'
 import { Route as IndexRouteImport } from './routes/index'
 
 const UsersRoute = UsersRouteImport.update({
@@ -20,9 +23,19 @@ const UsersRoute = UsersRouteImport.update({
   path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RepositoriesRoute = RepositoriesRouteImport.update({
+  id: '/repositories',
+  path: '/repositories',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PostsRoute = PostsRouteImport.update({
   id: '/posts',
   path: '/posts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PaymentRoute = PaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FruitsRoute = FruitsRouteImport.update({
@@ -35,6 +48,11 @@ const FormRoute = FormRouteImport.update({
   path: '/form',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FetchDataRoute = FetchDataRouteImport.update({
+  id: '/fetchData',
+  path: '/fetchData',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,39 +61,76 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
+  '/payment': typeof PaymentRoute
   '/posts': typeof PostsRoute
+  '/repositories': typeof RepositoriesRoute
   '/users': typeof UsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
+  '/payment': typeof PaymentRoute
   '/posts': typeof PostsRoute
+  '/repositories': typeof RepositoriesRoute
   '/users': typeof UsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
+  '/payment': typeof PaymentRoute
   '/posts': typeof PostsRoute
+  '/repositories': typeof RepositoriesRoute
   '/users': typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/form' | '/fruits' | '/posts' | '/users'
+  fullPaths:
+    | '/'
+    | '/fetchData'
+    | '/form'
+    | '/fruits'
+    | '/payment'
+    | '/posts'
+    | '/repositories'
+    | '/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/form' | '/fruits' | '/posts' | '/users'
-  id: '__root__' | '/' | '/form' | '/fruits' | '/posts' | '/users'
+  to:
+    | '/'
+    | '/fetchData'
+    | '/form'
+    | '/fruits'
+    | '/payment'
+    | '/posts'
+    | '/repositories'
+    | '/users'
+  id:
+    | '__root__'
+    | '/'
+    | '/fetchData'
+    | '/form'
+    | '/fruits'
+    | '/payment'
+    | '/posts'
+    | '/repositories'
+    | '/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FetchDataRoute: typeof FetchDataRoute
   FormRoute: typeof FormRoute
   FruitsRoute: typeof FruitsRoute
+  PaymentRoute: typeof PaymentRoute
   PostsRoute: typeof PostsRoute
+  RepositoriesRoute: typeof RepositoriesRoute
   UsersRoute: typeof UsersRoute
 }
 
@@ -88,11 +143,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/repositories': {
+      id: '/repositories'
+      path: '/repositories'
+      fullPath: '/repositories'
+      preLoaderRoute: typeof RepositoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/posts': {
       id: '/posts'
       path: '/posts'
       fullPath: '/posts'
       preLoaderRoute: typeof PostsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/payment': {
+      id: '/payment'
+      path: '/payment'
+      fullPath: '/payment'
+      preLoaderRoute: typeof PaymentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fruits': {
@@ -109,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FormRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fetchData': {
+      id: '/fetchData'
+      path: '/fetchData'
+      fullPath: '/fetchData'
+      preLoaderRoute: typeof FetchDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,9 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FetchDataRoute: FetchDataRoute,
   FormRoute: FormRoute,
   FruitsRoute: FruitsRoute,
+  PaymentRoute: PaymentRoute,
   PostsRoute: PostsRoute,
+  RepositoriesRoute: RepositoriesRoute,
   UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport

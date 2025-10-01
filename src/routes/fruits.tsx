@@ -5,7 +5,6 @@ export const Route = createFileRoute('/fruits')({
   component: Fruits,
 })
 
-
 function ProductCategoryRow({ category }) {
   return (
     <tr>
@@ -25,7 +24,6 @@ function ProductRow({ product }) {
   return (
     <tr>
       <td>{product.name}</td>
-      <td></td>
     </tr>
   ) 
 }
@@ -39,3 +37,4 @@ function Fruits() {
     </ul>
   )
 }
+
