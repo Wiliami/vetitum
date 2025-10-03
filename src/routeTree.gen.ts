@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UsersRouteImport } from './routes/users'
 import { Route as RepositoriesRouteImport } from './routes/repositories'
-import { Route as PostsRouteImport } from './routes/posts'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FormRouteImport } from './routes/form'
@@ -26,11 +25,6 @@ const UsersRoute = UsersRouteImport.update({
 const RepositoriesRoute = RepositoriesRouteImport.update({
   id: '/repositories',
   path: '/repositories',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PostsRoute = PostsRouteImport.update({
-  id: '/posts',
-  path: '/posts',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaymentRoute = PaymentRouteImport.update({
@@ -65,7 +59,6 @@ export interface FileRoutesByFullPath {
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
-  '/posts': typeof PostsRoute
   '/repositories': typeof RepositoriesRoute
   '/users': typeof UsersRoute
 }
@@ -75,7 +68,6 @@ export interface FileRoutesByTo {
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
-  '/posts': typeof PostsRoute
   '/repositories': typeof RepositoriesRoute
   '/users': typeof UsersRoute
 }
@@ -86,7 +78,6 @@ export interface FileRoutesById {
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
-  '/posts': typeof PostsRoute
   '/repositories': typeof RepositoriesRoute
   '/users': typeof UsersRoute
 }
@@ -98,7 +89,6 @@ export interface FileRouteTypes {
     | '/form'
     | '/fruits'
     | '/payment'
-    | '/posts'
     | '/repositories'
     | '/users'
   fileRoutesByTo: FileRoutesByTo
@@ -108,7 +98,6 @@ export interface FileRouteTypes {
     | '/form'
     | '/fruits'
     | '/payment'
-    | '/posts'
     | '/repositories'
     | '/users'
   id:
@@ -118,7 +107,6 @@ export interface FileRouteTypes {
     | '/form'
     | '/fruits'
     | '/payment'
-    | '/posts'
     | '/repositories'
     | '/users'
   fileRoutesById: FileRoutesById
@@ -129,7 +117,6 @@ export interface RootRouteChildren {
   FormRoute: typeof FormRoute
   FruitsRoute: typeof FruitsRoute
   PaymentRoute: typeof PaymentRoute
-  PostsRoute: typeof PostsRoute
   RepositoriesRoute: typeof RepositoriesRoute
   UsersRoute: typeof UsersRoute
 }
@@ -148,13 +135,6 @@ declare module '@tanstack/react-router' {
       path: '/repositories'
       fullPath: '/repositories'
       preLoaderRoute: typeof RepositoriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/posts': {
-      id: '/posts'
-      path: '/posts'
-      fullPath: '/posts'
-      preLoaderRoute: typeof PostsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/payment': {
@@ -201,7 +181,6 @@ const rootRouteChildren: RootRouteChildren = {
   FormRoute: FormRoute,
   FruitsRoute: FruitsRoute,
   PaymentRoute: PaymentRoute,
-  PostsRoute: PostsRoute,
   RepositoriesRoute: RepositoriesRoute,
   UsersRoute: UsersRoute,
 }

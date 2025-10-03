@@ -16,7 +16,7 @@ type Users = {
     email: string
 }
 
-export default function TableUsers() {
+export default function DataTable() {
     const [users, setUsers] = useState<Users[]>([]);
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function TableUsers() {
             if(response.ok) {
                 return response.json()
             }
-            throw response
+            throw response.statusText
         })
         .then(users => {
             setUsers(users)
@@ -48,14 +48,14 @@ export default function TableUsers() {
         </TableHeader>
 
         <TableBody>
-                {users.map(user => 
-                    <TableRow>
-                        <TableCell className="font-medium" key={user.id}>{user.id}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.username}</TableCell>
-                        <TableCell className="text-right">{user.email}</TableCell>
-                    </TableRow>
-                )}
+            {users.map(user => 
+                <TableRow>
+                    <TableCell className="font-medium" key={user.id}>{user.id}</TableCell>
+                    <TableCell>{user.name}</TableCell>
+                    <TableCell>{user.username}</TableCell>
+                    <TableCell className="text-right">{user.email}</TableCell>
+                </TableRow>
+            )}
         </TableBody>
     </Table>
   )
