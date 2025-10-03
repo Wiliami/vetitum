@@ -1,16 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { ListUsers } from './users/page'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ListUsers } from '@/routes/users/page'
+
+const queryClient = new QueryClient();
 
 export const Route = createFileRoute('/users')({
-  component: Users,
+  component: ListUsers,
 })
 
-function Users() {
-  
+export function Users() {
   return (
-    <div className='m-8'>
-      <h1 className='font-semibold'>Lista de usuários</h1>
-      <ListUsers />
-    </div>
+    <QueryClientProvider client={queryClient}>
+        <ListUsers />
+    </QueryClientProvider>
   )
 }
