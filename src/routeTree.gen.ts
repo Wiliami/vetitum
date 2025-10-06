@@ -16,6 +16,7 @@ import { Route as FormRouteImport } from './routes/form'
 import { Route as FetchDataRouteImport } from './routes/fetchData'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardPageRouteImport } from './routes/dashboard/page'
 
 const RepositoriesRoute = RepositoriesRouteImport.update({
   id: '/repositories',
@@ -52,6 +53,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardPageRoute = DashboardPageRouteImport.update({
+  id: '/dashboard/page',
+  path: '/dashboard/page',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +67,7 @@ export interface FileRoutesByFullPath {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
+  '/dashboard/page': typeof DashboardPageRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +77,7 @@ export interface FileRoutesByTo {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
+  '/dashboard/page': typeof DashboardPageRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
+  '/dashboard/page': typeof DashboardPageRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
+    | '/dashboard/page'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
+    | '/dashboard/page'
   id:
     | '__root__'
     | '/'
@@ -109,6 +120,7 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
+    | '/dashboard/page'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +131,7 @@ export interface RootRouteChildren {
   FruitsRoute: typeof FruitsRoute
   PaymentRoute: typeof PaymentRoute
   RepositoriesRoute: typeof RepositoriesRoute
+  DashboardPageRoute: typeof DashboardPageRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +185,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/page': {
+      id: '/dashboard/page'
+      path: '/dashboard/page'
+      fullPath: '/dashboard/page'
+      preLoaderRoute: typeof DashboardPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,6 +203,7 @@ const rootRouteChildren: RootRouteChildren = {
   FruitsRoute: FruitsRoute,
   PaymentRoute: PaymentRoute,
   RepositoriesRoute: RepositoriesRoute,
+  DashboardPageRoute: DashboardPageRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
