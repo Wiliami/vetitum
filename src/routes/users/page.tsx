@@ -2,7 +2,7 @@ import { columns, type User } from "./columns"
 import { DataTable } from './data-table'
 import { useQuery } from '@tanstack/react-query'
 
-export function ListUsers() {
+export function Users() {
   const { data, isPending, error } = useQuery<User[]>({
     queryKey: ['users'],
     queryFn: () => fetch('https://jsonplaceholder.typicode.com/users').then(response => response.json()),

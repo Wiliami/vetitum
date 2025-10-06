@@ -9,19 +9,14 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as UsersRouteImport } from './routes/users'
 import { Route as RepositoriesRouteImport } from './routes/repositories'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FormRouteImport } from './routes/form'
 import { Route as FetchDataRouteImport } from './routes/fetchData'
+import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 
-const UsersRoute = UsersRouteImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RepositoriesRoute = RepositoriesRouteImport.update({
   id: '/repositories',
   path: '/repositories',
@@ -47,6 +42,11 @@ const FetchDataRoute = FetchDataRouteImport.update({
   path: '/fetchData',
   getParentRoute: () => rootRouteImport,
 } as any)
+const R404Route = R404RouteImport.update({
+  id: '/404',
+  path: '/404',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -55,81 +55,74 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
-  '/users': typeof UsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
-  '/users': typeof UsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/404': typeof R404Route
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
-  '/users': typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/404'
     | '/fetchData'
     | '/form'
     | '/fruits'
     | '/payment'
     | '/repositories'
-    | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/404'
     | '/fetchData'
     | '/form'
     | '/fruits'
     | '/payment'
     | '/repositories'
-    | '/users'
   id:
     | '__root__'
     | '/'
+    | '/404'
     | '/fetchData'
     | '/form'
     | '/fruits'
     | '/payment'
     | '/repositories'
-    | '/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  R404Route: typeof R404Route
   FetchDataRoute: typeof FetchDataRoute
   FormRoute: typeof FormRoute
   FruitsRoute: typeof FruitsRoute
   PaymentRoute: typeof PaymentRoute
   RepositoriesRoute: typeof RepositoriesRoute
-  UsersRoute: typeof UsersRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/users': {
-      id: '/users'
-      path: '/users'
-      fullPath: '/users'
-      preLoaderRoute: typeof UsersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/repositories': {
       id: '/repositories'
       path: '/repositories'
@@ -165,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FetchDataRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/404': {
+      id: '/404'
+      path: '/404'
+      fullPath: '/404'
+      preLoaderRoute: typeof R404RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -177,12 +177,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  R404Route: R404Route,
   FetchDataRoute: FetchDataRoute,
   FormRoute: FormRoute,
   FruitsRoute: FruitsRoute,
   PaymentRoute: PaymentRoute,
   RepositoriesRoute: RepositoriesRoute,
-  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
