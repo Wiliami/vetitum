@@ -14,6 +14,7 @@ import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FormRouteImport } from './routes/form'
 import { Route as FetchDataRouteImport } from './routes/fetchData'
+import { Route as CampaignsRouteImport } from './routes/campaigns'
 import { Route as R404RouteImport } from './routes/404'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardPageRouteImport } from './routes/dashboard/page'
@@ -43,6 +44,11 @@ const FetchDataRoute = FetchDataRouteImport.update({
   path: '/fetchData',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CampaignsRoute = CampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const R404Route = R404RouteImport.update({
   id: '/404',
   path: '/404',
@@ -62,6 +68,7 @@ const DashboardPageRoute = DashboardPageRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/campaigns': typeof CampaignsRoute
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/campaigns': typeof CampaignsRoute
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/404': typeof R404Route
+  '/campaigns': typeof CampaignsRoute
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
   '/fruits': typeof FruitsRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/404'
+    | '/campaigns'
     | '/fetchData'
     | '/form'
     | '/fruits'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/404'
+    | '/campaigns'
     | '/fetchData'
     | '/form'
     | '/fruits'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/404'
+    | '/campaigns'
     | '/fetchData'
     | '/form'
     | '/fruits'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   R404Route: typeof R404Route
+  CampaignsRoute: typeof CampaignsRoute
   FetchDataRoute: typeof FetchDataRoute
   FormRoute: typeof FormRoute
   FruitsRoute: typeof FruitsRoute
@@ -171,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FetchDataRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/campaigns': {
+      id: '/campaigns'
+      path: '/campaigns'
+      fullPath: '/campaigns'
+      preLoaderRoute: typeof CampaignsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/404': {
       id: '/404'
       path: '/404'
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   R404Route: R404Route,
+  CampaignsRoute: CampaignsRoute,
   FetchDataRoute: FetchDataRoute,
   FormRoute: FormRoute,
   FruitsRoute: FruitsRoute,
