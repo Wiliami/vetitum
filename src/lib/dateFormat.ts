@@ -1,18 +1,16 @@
-export function formatDateFromISO(isoString: string): string {
-  const date = new Date(isoString);
+export function formatDateIntl(isoString: string | Date | null | undefined, locale: string = 'pt-BR'): string {
+  if (!isoString) return '—'; // se for null ou undefined
 
-  // Verifica se a data é válida
+  const date = typeof isoString === 'string' ? new Date(isoString.trim()) : isoString;
+
   if (isNaN(date.getTime())) {
-    throw new Error('Data inválida');
+    console.error('Data inválida recebida:', isoString);
+    return '—';
   }
 
-  const day = String(date.getDate()).padStart(2, '0');
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const year = date.getFullYear();
-
-  return `${day}/${month}/${year}`;
+  return new Intl.DateTimeFormat(locale, {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  }).format(date);
 }
-
-
-// formatDate()
-
