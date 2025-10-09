@@ -11,7 +11,11 @@ export type Campaign = {
 export const columns: ColumnDef<Campaign>[] = [
     {
         accessorKey: 'name',
-        header: 'Name' 
+        header: 'Nome da campanha' 
+    },
+    {
+        accessorKey: 'cliente_id',
+        header: 'Cliente da campanha' 
     },
     {
         accessorKey: 'status',
@@ -19,14 +23,10 @@ export const columns: ColumnDef<Campaign>[] = [
     },
     {
         accessorKey: 'createdAt',
-        header: 'Criado em' 
+        header: 'Data criação' 
     },
     {
         accessorKey: 'udpatedAt',
-        header: 'Atualizado em' 
-    },
-    {
-        accessorKey: 'cliente_id',
-        header: 'Cliente ID' 
+        header: 'Data atualização' 
     }
 ]

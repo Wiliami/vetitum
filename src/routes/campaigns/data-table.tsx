@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -22,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
+import { CreateCampaignDialog } from '@/routes/campaigns/create-campaign-dialog'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -56,7 +55,12 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <div className='m-8'>
-        <div className="flex items-center py-4">
+        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
+          Campanha
+        </h4>
+        <p className="text-muted-foreground text-sm">Gerencia suas campanhas.</p>
+
+        <div className="flex items-center py-4 justify-between">
           <Input
             placeholder="Pesquisar campanhas..."
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -65,6 +69,9 @@ export function DataTable<TData, TValue>({
             }
             className="max-w-sm"
           />
+
+          {/* Dialog */}
+          <CreateCampaignDialog />
         </div>
 
         <div className="overflow-hidden rounded-md border">

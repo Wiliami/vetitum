@@ -16,9 +16,7 @@ import { Route as FormRouteImport } from './routes/form'
 import { Route as FetchDataRouteImport } from './routes/fetchData'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
-import { Route as CampaignsRouteImport } from './routes/campaigns'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as CampaignsIndexRouteImport } from './routes/campaigns/index'
 
 const RepositoriesRoute = RepositoriesRouteImport.update({
   id: '/repositories',
@@ -55,25 +53,14 @@ const CampanhasRoute = CampanhasRouteImport.update({
   path: '/campanhas',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CampaignsRoute = CampaignsRouteImport.update({
-  id: '/campaigns',
-  path: '/campaigns',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CampaignsIndexRoute = CampaignsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => CampaignsRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/campaigns': typeof CampaignsRouteWithChildren
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
@@ -81,7 +68,6 @@ export interface FileRoutesByFullPath {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
-  '/campaigns/': typeof CampaignsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -92,12 +78,10 @@ export interface FileRoutesByTo {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
-  '/campaigns': typeof CampaignsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/campaigns': typeof CampaignsRouteWithChildren
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
@@ -105,13 +89,11 @@ export interface FileRoutesById {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
-  '/campaigns/': typeof CampaignsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/campaigns'
     | '/campanhas'
     | '/dashboard'
     | '/fetchData'
@@ -119,7 +101,6 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
-    | '/campaigns/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -130,11 +111,9 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
-    | '/campaigns'
   id:
     | '__root__'
     | '/'
-    | '/campaigns'
     | '/campanhas'
     | '/dashboard'
     | '/fetchData'
@@ -142,12 +121,10 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
-    | '/campaigns/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CampaignsRoute: typeof CampaignsRouteWithChildren
   CampanhasRoute: typeof CampanhasRoute
   DashboardRoute: typeof DashboardRoute
   FetchDataRoute: typeof FetchDataRoute
@@ -208,13 +185,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampanhasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/campaigns': {
-      id: '/campaigns'
-      path: '/campaigns'
-      fullPath: '/campaigns'
-      preLoaderRoute: typeof CampaignsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -222,31 +192,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/campaigns/': {
-      id: '/campaigns/'
-      path: '/'
-      fullPath: '/campaigns/'
-      preLoaderRoute: typeof CampaignsIndexRouteImport
-      parentRoute: typeof CampaignsRoute
-    }
   }
 }
 
-interface CampaignsRouteChildren {
-  CampaignsIndexRoute: typeof CampaignsIndexRoute
-}
-
-const CampaignsRouteChildren: CampaignsRouteChildren = {
-  CampaignsIndexRoute: CampaignsIndexRoute,
-}
-
-const CampaignsRouteWithChildren = CampaignsRoute._addFileChildren(
-  CampaignsRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CampaignsRoute: CampaignsRouteWithChildren,
   CampanhasRoute: CampanhasRoute,
   DashboardRoute: DashboardRoute,
   FetchDataRoute: FetchDataRoute,
