@@ -16,7 +16,7 @@ import { Route as FormRouteImport } from './routes/form'
 import { Route as FetchDataRouteImport } from './routes/fetchData'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
-import { Route as R404RouteImport } from './routes/404'
+import { Route as CampaignsRouteImport } from './routes/campaigns'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CampaignsIndexRouteImport } from './routes/campaigns/index'
 
@@ -55,9 +55,9 @@ const CampanhasRoute = CampanhasRouteImport.update({
   path: '/campanhas',
   getParentRoute: () => rootRouteImport,
 } as any)
-const R404Route = R404RouteImport.update({
-  id: '/404',
-  path: '/404',
+const CampaignsRoute = CampaignsRouteImport.update({
+  id: '/campaigns',
+  path: '/campaigns',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -73,7 +73,7 @@ const CampaignsIndexRoute = CampaignsIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/404': typeof R404Route
+  '/campaigns': typeof CampaignsRouteWithChildren
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
@@ -85,7 +85,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/404': typeof R404Route
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
@@ -98,7 +97,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/404': typeof R404Route
+  '/campaigns': typeof CampaignsRouteWithChildren
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
@@ -112,7 +111,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/404'
+    | '/campaigns'
     | '/campanhas'
     | '/dashboard'
     | '/fetchData'
@@ -124,7 +123,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/404'
     | '/campanhas'
     | '/dashboard'
     | '/fetchData'
@@ -136,7 +134,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/404'
+    | '/campaigns'
     | '/campanhas'
     | '/dashboard'
     | '/fetchData'
@@ -149,7 +147,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  R404Route: typeof R404Route
+  CampaignsRoute: typeof CampaignsRouteWithChildren
   CampanhasRoute: typeof CampanhasRoute
   DashboardRoute: typeof DashboardRoute
   FetchDataRoute: typeof FetchDataRoute
@@ -210,11 +208,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampanhasRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/404': {
-      id: '/404'
-      path: '/404'
-      fullPath: '/404'
-      preLoaderRoute: typeof R404RouteImport
+    '/campaigns': {
+      id: '/campaigns'
+      path: '/campaigns'
+      fullPath: '/campaigns'
+      preLoaderRoute: typeof CampaignsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -234,9 +232,21 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CampaignsRouteChildren {
+  CampaignsIndexRoute: typeof CampaignsIndexRoute
+}
+
+const CampaignsRouteChildren: CampaignsRouteChildren = {
+  CampaignsIndexRoute: CampaignsIndexRoute,
+}
+
+const CampaignsRouteWithChildren = CampaignsRoute._addFileChildren(
+  CampaignsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  R404Route: R404Route,
+  CampaignsRoute: CampaignsRouteWithChildren,
   CampanhasRoute: CampanhasRoute,
   DashboardRoute: DashboardRoute,
   FetchDataRoute: FetchDataRoute,
