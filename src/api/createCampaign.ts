@@ -26,6 +26,3 @@ export function createCampaign() {
       console.error('Erro ao tentar criar campanha: ', error)
     })
 }
-
-
-createCampaign()
