@@ -21,6 +21,7 @@ export async function createCampaign(formData: FormData) {
       headers: { 'content-type':'application/json' },
       body: JSON.stringify(campaign)
     })
+<<<<<<< HEAD
 
     if (response.ok) {
       const result = await response.json()
@@ -37,3 +38,6 @@ export async function createCampaign(formData: FormData) {
 }
 
 
+=======
+}
+>>>>>>> 543d214e9e3f39ee9287bee833b88fcc22ec810b
