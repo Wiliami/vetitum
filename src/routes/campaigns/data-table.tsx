@@ -55,11 +55,6 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <div className='m-8'>
-        <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
-          Campanha
-        </h4>
-        <p className="text-muted-foreground text-sm">Gerencia suas campanhas.</p>
-
         <div className="flex items-center py-4 justify-between">
           <Input
             placeholder="Pesquisar campanhas..."
@@ -70,7 +65,6 @@ export function DataTable<TData, TValue>({
             className="max-w-sm"
           />
 
-          {/* Dialog */}
           <CreateCampaignDialog />
         </div>
 
@@ -126,7 +120,7 @@ export function DataTable<TData, TValue>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant="outline"
@@ -134,7 +128,7 @@ export function DataTable<TData, TValue>({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Próximo
           </Button>
         </div>
       </div>
