@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createCampaignSchema, type CreateCampaignData } from '@/schemas/campaign';
-import { createCampaign } from '@/api/createCampaign';
+import { create } from '@/api/campaigns/route';
 import { useState } from 'react';
 
 interface UseCreateCampaignFormProps {
@@ -37,7 +37,7 @@ export function useCreateCampaignForm({
       formData.append('createdAt', data.createdAt);
       formData.append('updatedAt', data.updatedAt);
       
-      await createCampaign(formData);
+      await create(formData);
       
       form.reset();
       onSuccess?.();

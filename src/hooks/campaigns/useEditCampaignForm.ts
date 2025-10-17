@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { updateCampaignSchema, type UpdateCampaignData } from '@/schemas/campaign';
-import { updateCampaign } from '@/api/updateCampaign';
+import { update } from '@/api/campaigns/route';
 import { useState } from 'react';
 import { type Campaign } from '@/types/campaign';
 
@@ -33,7 +33,7 @@ export function useEditCampaignForm({
     try {
       setIsSubmitting(true);
       
-      await updateCampaign(campaign.id, data);
+      await update(campaign.id, data);
       
       onSuccess?.();
     } catch (error) {
