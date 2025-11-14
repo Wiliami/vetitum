@@ -2,10 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { AppSidebar } from "@/components/app-sidebar"
 import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
-import {
-  SidebarInset,
-  SidebarProvider,
-} from "@/components/ui/sidebar"
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { Campaigns } from '@/routes/(app)/campanhas'
 
 export const Route = createFileRoute('/(app)/dashboard')({

@@ -1,7 +1,7 @@
 import { DataTable } from '../app/campaigns/data-table'
-import { useQuery } from '@tanstack/react-query'
-import { type Campaign } from '@/types/campaign'
 import { useColumnsWithActions } from '../app/campaigns/columns-with-actions'
+import { type Campaign } from '@/types/campaign'
+import { useQuery } from '@tanstack/react-query'
 
 export function FetchAdsCampaigns() {  
   const { data, isPending, error, refetch } = useQuery<Campaign[]>({
@@ -9,6 +9,8 @@ export function FetchAdsCampaigns() {
       queryFn: () => fetch('https://68e532fb8e116898997ecdea.mockapi.io/api/v1/campaigns')
       .then(response => response.json()),
   })
+
+  console.log(data)
 
   const { columns, editDialog, deleteDialog } = useColumnsWithActions({
     onEditSuccess: () => {

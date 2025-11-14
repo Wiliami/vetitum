@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
-import { Route as appCampanhasRouteImport } from './routes/(app)/campanhas'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,39 +22,30 @@ const appDashboardRoute = appDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const appCampanhasRoute = appCampanhasRouteImport.update({
-  id: '/(app)/campanhas',
-  path: '/campanhas',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/campanhas': typeof appCampanhasRoute
   '/dashboard': typeof appDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/campanhas': typeof appCampanhasRoute
   '/dashboard': typeof appDashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/(app)/campanhas': typeof appCampanhasRoute
   '/(app)/dashboard': typeof appDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/campanhas' | '/dashboard'
+  fullPaths: '/' | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/campanhas' | '/dashboard'
-  id: '__root__' | '/' | '/(app)/campanhas' | '/(app)/dashboard'
+  to: '/' | '/dashboard'
+  id: '__root__' | '/' | '/(app)/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  appCampanhasRoute: typeof appCampanhasRoute
   appDashboardRoute: typeof appDashboardRoute
 }
 
@@ -75,19 +65,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(app)/campanhas': {
-      id: '/(app)/campanhas'
-      path: '/campanhas'
-      fullPath: '/campanhas'
-      preLoaderRoute: typeof appCampanhasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  appCampanhasRoute: appCampanhasRoute,
   appDashboardRoute: appDashboardRoute,
 }
 export const routeTree = rootRouteImport
