@@ -1,5 +1,5 @@
 {
-  "include": ["**/*.ts", "**/*.tsx", "src/lib/dateFormat.ts"],
+  "include": ["**/*.ts", "**/*.tsx", "src/lib/dateFormat.ts", "src/helpers/campaigns.ts"],
   "compilerOptions": {
     "target": "ES2022",
     "jsx": "react-jsx",

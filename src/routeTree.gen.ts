@@ -9,182 +9,58 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RepositoriesRouteImport } from './routes/repositories'
-import { Route as PaymentRouteImport } from './routes/payment'
-import { Route as FruitsRouteImport } from './routes/fruits'
-import { Route as FormRouteImport } from './routes/form'
-import { Route as FetchDataRouteImport } from './routes/fetchData'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as CampanhasRouteImport } from './routes/campanhas'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
+import { Route as appCampanhasRouteImport } from './routes/(app)/campanhas'
 
-const RepositoriesRoute = RepositoriesRouteImport.update({
-  id: '/repositories',
-  path: '/repositories',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PaymentRoute = PaymentRouteImport.update({
-  id: '/payment',
-  path: '/payment',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FruitsRoute = FruitsRouteImport.update({
-  id: '/fruits',
-  path: '/fruits',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FormRoute = FormRouteImport.update({
-  id: '/form',
-  path: '/form',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FetchDataRoute = FetchDataRouteImport.update({
-  id: '/fetchData',
-  path: '/fetchData',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CampanhasRoute = CampanhasRouteImport.update({
-  id: '/campanhas',
-  path: '/campanhas',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const appDashboardRoute = appDashboardRouteImport.update({
+  id: '/(app)/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const appCampanhasRoute = appCampanhasRouteImport.update({
+  id: '/(app)/campanhas',
+  path: '/campanhas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/campanhas': typeof CampanhasRoute
-  '/dashboard': typeof DashboardRoute
-  '/fetchData': typeof FetchDataRoute
-  '/form': typeof FormRoute
-  '/fruits': typeof FruitsRoute
-  '/payment': typeof PaymentRoute
-  '/repositories': typeof RepositoriesRoute
+  '/campanhas': typeof appCampanhasRoute
+  '/dashboard': typeof appDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/campanhas': typeof CampanhasRoute
-  '/dashboard': typeof DashboardRoute
-  '/fetchData': typeof FetchDataRoute
-  '/form': typeof FormRoute
-  '/fruits': typeof FruitsRoute
-  '/payment': typeof PaymentRoute
-  '/repositories': typeof RepositoriesRoute
+  '/campanhas': typeof appCampanhasRoute
+  '/dashboard': typeof appDashboardRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/campanhas': typeof CampanhasRoute
-  '/dashboard': typeof DashboardRoute
-  '/fetchData': typeof FetchDataRoute
-  '/form': typeof FormRoute
-  '/fruits': typeof FruitsRoute
-  '/payment': typeof PaymentRoute
-  '/repositories': typeof RepositoriesRoute
+  '/(app)/campanhas': typeof appCampanhasRoute
+  '/(app)/dashboard': typeof appDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/campanhas'
-    | '/dashboard'
-    | '/fetchData'
-    | '/form'
-    | '/fruits'
-    | '/payment'
-    | '/repositories'
+  fullPaths: '/' | '/campanhas' | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/campanhas'
-    | '/dashboard'
-    | '/fetchData'
-    | '/form'
-    | '/fruits'
-    | '/payment'
-    | '/repositories'
-  id:
-    | '__root__'
-    | '/'
-    | '/campanhas'
-    | '/dashboard'
-    | '/fetchData'
-    | '/form'
-    | '/fruits'
-    | '/payment'
-    | '/repositories'
+  to: '/' | '/campanhas' | '/dashboard'
+  id: '__root__' | '/' | '/(app)/campanhas' | '/(app)/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CampanhasRoute: typeof CampanhasRoute
-  DashboardRoute: typeof DashboardRoute
-  FetchDataRoute: typeof FetchDataRoute
-  FormRoute: typeof FormRoute
-  FruitsRoute: typeof FruitsRoute
-  PaymentRoute: typeof PaymentRoute
-  RepositoriesRoute: typeof RepositoriesRoute
+  appCampanhasRoute: typeof appCampanhasRoute
+  appDashboardRoute: typeof appDashboardRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/repositories': {
-      id: '/repositories'
-      path: '/repositories'
-      fullPath: '/repositories'
-      preLoaderRoute: typeof RepositoriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/payment': {
-      id: '/payment'
-      path: '/payment'
-      fullPath: '/payment'
-      preLoaderRoute: typeof PaymentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fruits': {
-      id: '/fruits'
-      path: '/fruits'
-      fullPath: '/fruits'
-      preLoaderRoute: typeof FruitsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/form': {
-      id: '/form'
-      path: '/form'
-      fullPath: '/form'
-      preLoaderRoute: typeof FormRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/fetchData': {
-      id: '/fetchData'
-      path: '/fetchData'
-      fullPath: '/fetchData'
-      preLoaderRoute: typeof FetchDataRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/campanhas': {
-      id: '/campanhas'
-      path: '/campanhas'
-      fullPath: '/campanhas'
-      preLoaderRoute: typeof CampanhasRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -192,18 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(app)/dashboard': {
+      id: '/(app)/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof appDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(app)/campanhas': {
+      id: '/(app)/campanhas'
+      path: '/campanhas'
+      fullPath: '/campanhas'
+      preLoaderRoute: typeof appCampanhasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CampanhasRoute: CampanhasRoute,
-  DashboardRoute: DashboardRoute,
-  FetchDataRoute: FetchDataRoute,
-  FormRoute: FormRoute,
-  FruitsRoute: FruitsRoute,
-  PaymentRoute: PaymentRoute,
-  RepositoriesRoute: RepositoriesRoute,
+  appCampanhasRoute: appCampanhasRoute,
+  appDashboardRoute: appDashboardRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

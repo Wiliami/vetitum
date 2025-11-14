@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { deleteCampaign } from '@/api/campaigns/route';
+import { deleteCampaign } from '@/helpers/campaigns';
 
 interface UseDeleteCampaignProps {
   onSuccess?: () => void;

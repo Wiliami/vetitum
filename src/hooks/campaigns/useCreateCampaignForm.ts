@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createCampaignSchema, type CreateCampaignData } from '@/schemas/campaign';
-import { create } from '@/api/campaigns/route';
+import { create } from '@/helpers/campaigns';
 import { useState } from 'react';
 
 interface UseCreateCampaignFormProps {
