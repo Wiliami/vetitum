@@ -15,6 +15,7 @@ import { Route as FruitsRouteImport } from './routes/fruits'
 import { Route as FormRouteImport } from './routes/form'
 import { Route as FetchDataRouteImport } from './routes/fetchData'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CounterRouteImport } from './routes/counter'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -48,6 +49,11 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CounterRoute = CounterRouteImport.update({
+  id: '/counter',
+  path: '/counter',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CampanhasRoute = CampanhasRouteImport.update({
   id: '/campanhas',
   path: '/campanhas',
@@ -62,6 +68,7 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
+  '/counter': typeof CounterRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
@@ -72,6 +79,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
+  '/counter': typeof CounterRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
@@ -83,6 +91,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
+  '/counter': typeof CounterRoute
   '/dashboard': typeof DashboardRoute
   '/fetchData': typeof FetchDataRoute
   '/form': typeof FormRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/campanhas'
+    | '/counter'
     | '/dashboard'
     | '/fetchData'
     | '/form'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/campanhas'
+    | '/counter'
     | '/dashboard'
     | '/fetchData'
     | '/form'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/campanhas'
+    | '/counter'
     | '/dashboard'
     | '/fetchData'
     | '/form'
@@ -126,6 +138,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CampanhasRoute: typeof CampanhasRoute
+  CounterRoute: typeof CounterRoute
   DashboardRoute: typeof DashboardRoute
   FetchDataRoute: typeof FetchDataRoute
   FormRoute: typeof FormRoute
@@ -178,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/counter': {
+      id: '/counter'
+      path: '/counter'
+      fullPath: '/counter'
+      preLoaderRoute: typeof CounterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/campanhas': {
       id: '/campanhas'
       path: '/campanhas'
@@ -198,6 +218,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CampanhasRoute: CampanhasRoute,
+  CounterRoute: CounterRoute,
   DashboardRoute: DashboardRoute,
   FetchDataRoute: FetchDataRoute,
   FormRoute: FormRoute,
