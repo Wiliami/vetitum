@@ -1,12 +1,6 @@
 import { type ColumnDef } from "@tanstack/react-table"
+import { type Campaign } from "@/types/Campaign"
 
-export type Campaign = {
-    id: string
-    cliente_id: number
-    status: string
-    createdAt: number
-    udpatedAt: number
-}
 
 export const columns: ColumnDef<Campaign>[] = [
     {

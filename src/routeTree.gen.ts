@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UsersRouteImport } from './routes/users'
 import { Route as RepositoriesRouteImport } from './routes/repositories'
 import { Route as PaymentRouteImport } from './routes/payment'
 import { Route as FruitsRouteImport } from './routes/fruits'
@@ -19,6 +20,11 @@ import { Route as CounterRouteImport } from './routes/counter'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
 import { Route as IndexRouteImport } from './routes/index'
 
+const UsersRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RepositoriesRoute = RepositoriesRouteImport.update({
   id: '/repositories',
   path: '/repositories',
@@ -75,6 +81,7 @@ export interface FileRoutesByFullPath {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
+  '/users': typeof UsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -86,6 +93,7 @@ export interface FileRoutesByTo {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
+  '/users': typeof UsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -98,6 +106,7 @@ export interface FileRoutesById {
   '/fruits': typeof FruitsRoute
   '/payment': typeof PaymentRoute
   '/repositories': typeof RepositoriesRoute
+  '/users': typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +120,7 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
+    | '/users'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
+    | '/users'
   id:
     | '__root__'
     | '/'
@@ -133,6 +144,7 @@ export interface FileRouteTypes {
     | '/fruits'
     | '/payment'
     | '/repositories'
+    | '/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -145,10 +157,18 @@ export interface RootRouteChildren {
   FruitsRoute: typeof FruitsRoute
   PaymentRoute: typeof PaymentRoute
   RepositoriesRoute: typeof RepositoriesRoute
+  UsersRoute: typeof UsersRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/repositories': {
       id: '/repositories'
       path: '/repositories'
@@ -225,6 +245,7 @@ const rootRouteChildren: RootRouteChildren = {
   FruitsRoute: FruitsRoute,
   PaymentRoute: PaymentRoute,
   RepositoriesRoute: RepositoriesRoute,
+  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

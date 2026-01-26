@@ -1,11 +1,6 @@
 import { type ColumnDef } from "@tanstack/react-table"
+import { type User } from '@/types/User'
 
-export type User = {
-    id: string
-    name: string
-    username: string
-    email: string
-}
 
 export const columns: ColumnDef<User>[] = [
     { 

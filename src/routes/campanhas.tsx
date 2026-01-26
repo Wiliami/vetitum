@@ -1,17 +1,30 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
-import { FetchAdsCampaigns } from '@/routes/campaigns/fetchAdsCampaigns'
-
-const queryClient = new QueryClient()
+import { useQuery } from '@tanstack/react-query'
+import { getAdsCampaigns } from '@/functions/getAdsCampaigns'
+import { DataTable } from '@/components/data-table'
 
 export const Route = createFileRoute('/campanhas')({
   component: Campaigns,
 })
 
 export function Campaigns() {
+  const { data, isPending, error } = useQuery({
+    queryKey: ['campaigns'],
+    queryFn: getAdsCampaigns,
+  })
+
+  console.log(data)
+  
+  if (isPending) return <span className="container mx-auto py-10">Loading...</span>
+  if (error) return <span>Oops!</span>
+
   return (
-    <QueryClientProvider client={queryClient}>
-      <FetchAdsCampaigns />
-    </QueryClientProvider>
+      <div className="container mx-auto py-10">
+
+        {/* <DataTable data={data}/> */}
+        <h1><strong>Profile Github</strong></h1>
+        <div>Name: {data.name}</div><br />
+        <div>Biografia: {data.bio}</div>
+      </div>
   )
 }
