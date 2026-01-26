@@ -3,10 +3,6 @@ import { useQuery } from '@tanstack/react-query'
 import { getAdsCampaigns } from '@/functions/getAdsCampaigns'
 import { DataTable } from '@/components/data-table'
 
-export const Route = createFileRoute('/campanhas')({
-  component: Campaigns,
-})
-
 export function Campaigns() {
   const { data, isPending, error } = useQuery({
     queryKey: ['campaigns'],

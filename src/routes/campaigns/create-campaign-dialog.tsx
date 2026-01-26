@@ -11,7 +11,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { Button } from '@/components/ui/button'
 import { Input } from  '@/components/ui/input'
-import { createCampaign } from "@/functions/createCampaign"
+import { createCampaign } from "@/functions/create-campaign"
 
 export function CreateCampaignDialog() {
   return (

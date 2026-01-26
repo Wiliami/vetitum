@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-
 import {
   type ColumnDef,
   type ColumnFiltersState,
@@ -22,7 +21,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-
+import { CreateCampaignDialog } from '@/components/create-campaign-dialog'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -56,15 +55,17 @@ export function DataTable<TData, TValue>({
   return (
     <>
       <div className='m-8'>
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-4 justify-between">
           <Input
-            placeholder="Pesquisar usuários..."
+            placeholder="Pesquisar campanhas..."
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("name")?.setFilterValue(event.target.value)
             }
             className="max-w-sm"
           />
+
+          <CreateCampaignDialog />
         </div>
 
         <div className="overflow-hidden rounded-md border">
@@ -119,7 +120,7 @@ export function DataTable<TData, TValue>({
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant="outline"
@@ -127,7 +128,7 @@ export function DataTable<TData, TValue>({
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Próximo
           </Button>
         </div>
       </div>

@@ -32,9 +32,4 @@ export function PageNotFound() {
       )
 }
 
-
-
-
-
-    
-  
+export default PageNotFound;
