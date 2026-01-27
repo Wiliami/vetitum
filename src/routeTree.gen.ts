@@ -10,19 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UsersRouteImport } from './routes/users'
-import { Route as CounterRouteImport } from './routes/counter'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as CampanhasRouteImport } from './routes/campanhas'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as UsersPageRouteImport } from './routes/users/page'
-import { Route as appDashboardRouteImport } from './routes/(app)/dashboard'
 
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
   path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CounterRoute = CounterRouteImport.update({
-  id: '/counter',
-  path: '/counter',
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampanhasRoute = CampanhasRouteImport.update({
+  id: '/campanhas',
+  path: '/campanhas',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -30,58 +34,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UsersPageRoute = UsersPageRouteImport.update({
-  id: '/page',
-  path: '/page',
-  getParentRoute: () => UsersRoute,
-} as any)
-const appDashboardRoute = appDashboardRouteImport.update({
-  id: '/(app)/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/counter': typeof CounterRoute
-  '/users': typeof UsersRouteWithChildren
-  '/dashboard': typeof appDashboardRoute
-  '/users/page': typeof UsersPageRoute
+  '/campanhas': typeof CampanhasRoute
+  '/dashboard': typeof DashboardRoute
+  '/users': typeof UsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/counter': typeof CounterRoute
-  '/users': typeof UsersRouteWithChildren
-  '/dashboard': typeof appDashboardRoute
-  '/users/page': typeof UsersPageRoute
+  '/campanhas': typeof CampanhasRoute
+  '/dashboard': typeof DashboardRoute
+  '/users': typeof UsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/counter': typeof CounterRoute
-  '/users': typeof UsersRouteWithChildren
-  '/(app)/dashboard': typeof appDashboardRoute
-  '/users/page': typeof UsersPageRoute
+  '/campanhas': typeof CampanhasRoute
+  '/dashboard': typeof DashboardRoute
+  '/users': typeof UsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/counter' | '/users' | '/dashboard' | '/users/page'
+  fullPaths: '/' | '/campanhas' | '/dashboard' | '/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/counter' | '/users' | '/dashboard' | '/users/page'
-  id:
-    | '__root__'
-    | '/'
-    | '/counter'
-    | '/users'
-    | '/(app)/dashboard'
-    | '/users/page'
+  to: '/' | '/campanhas' | '/dashboard' | '/users'
+  id: '__root__' | '/' | '/campanhas' | '/dashboard' | '/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CounterRoute: typeof CounterRoute
-  UsersRoute: typeof UsersRouteWithChildren
-  appDashboardRoute: typeof appDashboardRoute
+  CampanhasRoute: typeof CampanhasRoute
+  DashboardRoute: typeof DashboardRoute
+  UsersRoute: typeof UsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -93,11 +78,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/counter': {
-      id: '/counter'
-      path: '/counter'
-      fullPath: '/counter'
-      preLoaderRoute: typeof CounterRouteImport
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/campanhas': {
+      id: '/campanhas'
+      path: '/campanhas'
+      fullPath: '/campanhas'
+      preLoaderRoute: typeof CampanhasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -107,38 +99,14 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/users/page': {
-      id: '/users/page'
-      path: '/page'
-      fullPath: '/users/page'
-      preLoaderRoute: typeof UsersPageRouteImport
-      parentRoute: typeof UsersRoute
-    }
-    '/(app)/dashboard': {
-      id: '/(app)/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof appDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
-interface UsersRouteChildren {
-  UsersPageRoute: typeof UsersPageRoute
-}
-
-const UsersRouteChildren: UsersRouteChildren = {
-  UsersPageRoute: UsersPageRoute,
-}
-
-const UsersRouteWithChildren = UsersRoute._addFileChildren(UsersRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CounterRoute: CounterRoute,
-  UsersRoute: UsersRouteWithChildren,
-  appDashboardRoute: appDashboardRoute,
+  CampanhasRoute: CampanhasRoute,
+  DashboardRoute: DashboardRoute,
+  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
