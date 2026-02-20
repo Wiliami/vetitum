@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { EditCampaignForm } from "./EditCampaignForm"
-import { type Campaign } from "@/types/campaign"
+import { type Campaign } from "@/types/campaign"  
 
 interface EditCampaignDialogProps {
   campaign: Campaign | null;
@@ -38,7 +38,7 @@ export function EditCampaignDialog({
         <DialogHeader>
           <DialogTitle>Editar campanha</DialogTitle>
           <DialogDescription>
-            Edite os dados da campanha "{campaign.name}".
+            Edite os dados da campanha <strong>"{campaign.name}"</strong>.
           </DialogDescription>
         </DialogHeader>
         <EditCampaignForm 

@@ -3,7 +3,7 @@ import { AppSidebar } from "@/components/app-sidebar"
 import { SectionCards } from "@/components/section-cards"
 import { SiteHeader } from "@/components/site-header"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import { Campaigns } from '@/routes/(app)/campanhas'
+import { CampaignsPage } from '@/routes/(app)/campanhas'
 
 export const Route = createFileRoute('/(app)/dashboard')({
   component: Dashboard,
@@ -28,7 +28,7 @@ export function Dashboard() {
                 <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
                   <SectionCards /> 
                   {/* <DataTable data={data} /> */}
-                  <Campaigns />
+                  <CampaignsPage />
                 </div>
               </div>
             </div>

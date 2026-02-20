@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Users } from './users/page'
+import { CampaignsPage } from './(app)/campanhas';
 
 const queryClient = new QueryClient();
 
@@ -11,7 +11,7 @@ export const Route = createFileRoute('/')({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Users />
+      <CampaignsPage />
     </QueryClientProvider>
   )
 }

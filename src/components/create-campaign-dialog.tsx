@@ -9,7 +9,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { CirclePlus } from 'lucide-react';
 import { useState } from 'react';
-import { CreateCampaignForm } from '@/components/campaigns/CreateCampaignForm';
+import { CreateCampaignForm } from '@/components/campaigns/CreateCampaignPage';
 
 export function CreateCampaignDialog() {
   const [isOpen, setIsOpen] = useState(false);
