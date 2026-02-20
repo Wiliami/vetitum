@@ -1,6 +1,7 @@
 import { type ColumnDef } from "@tanstack/react-table"
 import { type Campaign } from "@/types/campaign"
 
+
 export const columns: ColumnDef<Campaign>[] = [
     {
         accessorKey: 'name',
@@ -8,7 +9,7 @@ export const columns: ColumnDef<Campaign>[] = [
     },
     {
         accessorKey: 'owner_client',
-        header: 'Cliente da campanha' 
+        header: 'Cliente' 
     },
     {
         accessorKey: 'status',
