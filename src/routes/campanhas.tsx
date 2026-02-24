@@ -4,7 +4,6 @@ import { getAdsCampaigns } from '@/functions/get-campaigns'
 import { DataTable } from '../app/campaigns/data-table'
 import { columns } from '../app/campaigns/columns'
 
-
 export const Route = createFileRoute('/campanhas')({
   component: Campaigns,
 })

@@ -9,11 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoosRouteImport } from './routes/voos'
 import { Route as UsersRouteImport } from './routes/users'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CampanhasRouteImport } from './routes/campanhas'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VoosRoute = VoosRouteImport.update({
+  id: '/voos',
+  path: '/voos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
   path: '/users',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/users': typeof UsersRoute
+  '/voos': typeof VoosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/users': typeof UsersRoute
+  '/voos': typeof VoosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/campanhas': typeof CampanhasRoute
   '/dashboard': typeof DashboardRoute
   '/users': typeof UsersRoute
+  '/voos': typeof VoosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/campanhas' | '/dashboard' | '/users'
+  fullPaths: '/' | '/campanhas' | '/dashboard' | '/users' | '/voos'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/campanhas' | '/dashboard' | '/users'
-  id: '__root__' | '/' | '/campanhas' | '/dashboard' | '/users'
+  to: '/' | '/campanhas' | '/dashboard' | '/users' | '/voos'
+  id: '__root__' | '/' | '/campanhas' | '/dashboard' | '/users' | '/voos'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,10 +76,18 @@ export interface RootRouteChildren {
   CampanhasRoute: typeof CampanhasRoute
   DashboardRoute: typeof DashboardRoute
   UsersRoute: typeof UsersRoute
+  VoosRoute: typeof VoosRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/voos': {
+      id: '/voos'
+      path: '/voos'
+      fullPath: '/voos'
+      preLoaderRoute: typeof VoosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/users': {
       id: '/users'
       path: '/users'
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   CampanhasRoute: CampanhasRoute,
   DashboardRoute: DashboardRoute,
   UsersRoute: UsersRoute,
+  VoosRoute: VoosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
